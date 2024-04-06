@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <!--
+    SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+    SPDX-License-Identifier: CC0-1.0
+    -->
+    <id>nextframe</id>
+    <name>NextFrame</name>
+    <summary>Embeddable Nextcloud topbar to bring your services together!</summary>
+    <description><![CDATA[This app creates a simple endpoint with the common HTML components to any Nextcloud view, with a public and logged in variant.
+This is intended to improve the &quot;togetherness&quot; of non-Nextcloud services with Nextcloud/OIDC login capabilities.]]></description>
+    <version>0.0.1</version>
+    <licence>agpl</licence>
+    <author mail="me@thesola.io" homepage="https://thesola.io">Karim Vergnes</author>
+    <namespace>NextFrame</namespace>
+    <category>customization</category>
+    <category>tools</category>
+    <bugs>https://github.com/thesola10/nextcloud-nextframe/issues</bugs>
+    <dependencies>
+        <nextcloud min-version="27" max-version="28"/>
+    </dependencies>
+    <navigations>
+    </navigations>
+</info>

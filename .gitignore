@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+*.iml
+.idea
+/.php-cs-fixer.cache
+/.php_cs.cache
+/build/
+/vendor/
+js/*hot-update.*
+node_modules/
