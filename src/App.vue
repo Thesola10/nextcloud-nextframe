@@ -59,7 +59,7 @@ export default {
 }
 </script>
 <style>
-    body {
+    html, body {
         background: none !important;
     }
 
