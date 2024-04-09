@@ -22,28 +22,7 @@ import axios from '@nextcloud/axios'
 export default {
 	name: 'App',
 	computed: {
-		/**
-		 * Return the currently selected note object
-		 * @returns {Object|null}
-		 */
-		currentNote() {
-			if (this.currentNoteId === null) {
-				return null
-			}
-			return this.notes.find((note) => note.id === this.currentNoteId)
-		},
-
-		/**
-		 * Returns true if a note is selected and its title is not empty
-		 * @returns {Boolean}
-		 */
-		savePossible() {
-			return this.currentNote && this.currentNote.title !== ''
-		},
 	},
-	/**
-	 * Fetch list of notes when the component is loaded
-	 */
 	async mounted() {
 		try {
 			const response = await axios.get(generateUrl('/apps/nextframe'))
@@ -63,7 +42,7 @@ export default {
         background: none !important;
     }
 
-    #unified-search {
+    #unified-search, footer {
         display: none !important;
     }
 
