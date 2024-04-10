@@ -1,7 +1,7 @@
 {
   "name": "nextframe",
   "description": "Embeddable Nextcloud topbar to bring your services together!",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Karim Vergnes <me@thesola.io>",
   "contributors": [],
   "bugs": {
