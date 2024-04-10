@@ -1,14 +1,7 @@
 // SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-require('iframe-resizer').contentWindow
-
-if ('parentIFrame' in window) {
-
-if (! 'getFrameInfo' in window.parentIFrame) {
-    let style = "font-size: 1.5em;"
-    console.info("%cNextFrame supports iframeResizer! Get it from https://davidjbradshaw.github.io/iframe-resizer/ and try attaching it to this page!", style)
-}
+require('iframe-resizer').contentWindow;
 
 /*
  * Grows frame to cover parent document
@@ -31,26 +24,28 @@ const popupsObserver = new IntersectionObserver(
         entries.forEach(e => {
             if (e.isIntersecting) {
                 growFrame();
-            } else {
+            } else {
                 shrinkFrame();
             }
         })
     })
 
-document.getElementsByClassName("header-menu__wrapper")
-        .forEach(el => {
-            console.log("Registering %o for size change", el);
-            popupsObserver.observe(el);
-        })
+window.addEventListener("load", (ev) => {
+    document.getElementsByClassName("header-menu__wrapper")
+            .forEach(el => {
+                console.log("Registering %o for size change", el);
+                popupsObserver.observe(el);
+            })
 
-// Bonus! Support for Custom Menu
-let sidemenu = document.getElementById("side-menu")
-if (sidemenu !== null) {
-    console.log("Found Custom Menu!")
-    popupsObserver.observe(sidemenu)
-}
+    // Bonus! Support for Custom Menu
+    let sidemenu = document.getElementById("side-menu")
+    if (sidemenu !== null) {
+        console.log("Found Custom Menu!")
+        popupsObserver.observe(sidemenu)
+    }
+})
 
-
-} else {
-    console.info("%cNextFrame supports iframeResizer! Get it from https://davidjbradshaw.github.io/iframe-resizer/ and try attaching it to this page in an iframe!")
+if (!('parentIFrame' in window)) {
+    let style = "font-size: 1.5em;"
+    console.info("%cNextFrame supports iframeResizer! Get it from https://davidjbradshaw.github.io/iframe-resizer/ and try attaching it to this page!", style)
 }
