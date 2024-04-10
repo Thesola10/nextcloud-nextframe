@@ -1,5 +1,8 @@
 <?php
 
+// SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace OCA\NextFrame\Controller;
 
 use OCA\NextFrame\AppInfo\Application;

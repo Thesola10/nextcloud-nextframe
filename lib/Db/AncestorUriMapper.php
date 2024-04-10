@@ -2,6 +2,9 @@
 
 namespace OCA\NextFrame\Db;
 
+// SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\AppFramework\Db\QBMapper;

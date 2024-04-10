@@ -1,4 +1,8 @@
 <template>
+    <!--
+    SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+    SPDX-License-Identifier: AGPL-3.0-or-later
+    -->
     <tr>
         <td>
             <table class="inline">

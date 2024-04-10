@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+// SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 namespace OCA\NextFrame\Controller;
 
@@ -12,6 +14,7 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use OCP\IL10N;
 use OCP\Security\ISecureRandom;
 
 class SettingsController extends Controller
@@ -19,6 +22,7 @@ class SettingsController extends Controller
     private $clientMapper;
     private $secureRandom;
     private $ancestorMapper;
+    private $l;
 
     public const validChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -26,19 +30,21 @@ class SettingsController extends Controller
                                 , IRequest $request
                                 , ClientMapper $clientMapper
                                 , ISecureRandom $secureRandom
-                                , AncestorUriMapper $ancestorMapper)
+                                , AncestorUriMapper $ancestorMapper
+                                , IL10N $l10n)
     {
         parent::__construct($appName, $request);
         $this->secureRandom = $secureRandom;
         $this->clientMapper = $clientMapper;
         $this->ancestorMapper = $ancestorMapper;
+        $this->l = $l10n;
     }
 
     public function addClient( string $name
                              , string $ancestorUri): JSONResponse
     {
         if (filter_var($ancestorUri, FILTER_VALIDATE_URL) === false) {
-            return new JSONResponse([ 'message' => "The ancestor URL needs to be a full URL. For example: https://example.com/"]
+            return new JSONResponse([ 'message' => $this->l->t("The ancestor URL needs to be a full URL. For example: https://example.com/")]
                                    , Http::STATUS_BAD_REQUEST);
         }
 
