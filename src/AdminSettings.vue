@@ -3,7 +3,7 @@
     SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
     SPDX-License-Identifier: AGPL-3.0-or-later
     -->
-	<div id="nextframe" class="section">
+    <div id="nextframe" class="section">
         <h2>{{ t('nextframe', 'Nextframe embedding clients') }}</h2>
         <p class="settings-hint">
         {{ t('nextframe', 'Nextframe allows external sites to embed the {instanceName} top bar.') }}
@@ -45,7 +45,7 @@
                 :placeholder="t('nextframe', 'Permitted frame ancestor URI')">
             <input type="submit" class="button" :value="t('nextframe', 'Add')">
         </form>
-	</div>
+    </div>
 </template>
 
 <script>
@@ -56,10 +56,10 @@ import axios from '@nextcloud/axios'
 import NextframeItem from './components/NextframeItem.vue'
 
 export default {
-	name: 'AdminSettings',
-	components: {
+    name: 'AdminSettings',
+    components: {
         NextframeItem
-	},
+    },
     props: {
         clients: {
             type: Array,
@@ -79,7 +79,7 @@ export default {
             version: 0,
         }
     },
-	methods: {
+    methods: {
         deleteAncestorUri(id) {
             axios.delete(generateUrl('apps/nextframe/clients/ancestor/{id}', { id }))
                 .then(response => {
@@ -132,7 +132,7 @@ export default {
                     this.newClient.errorMsg = reason.response.data.message
                 })
         }
-	},
+    },
 }
 </script>
 <style scoped>

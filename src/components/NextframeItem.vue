@@ -72,22 +72,22 @@ export default {
 </script>
 
 <style scoped>
-	.icon-toggle,
-	.icon-delete {
-		display: inline-block;
-		width: 16px;
-		height: 16px;
-		padding: 10px;
-		vertical-align: middle;
-	}
+    .icon-toggle,
+    .icon-delete {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        padding: 10px;
+        vertical-align: middle;
+    }
 
-	td code {
-		display: inline-block;
-		vertical-align: middle;
-	}
+    td code {
+        display: inline-block;
+        vertical-align: middle;
+    }
 
-	table.inline td {
-		border: none;
-		padding: 5px;
-	}
+    table.inline td {
+        border: none;
+        padding: 5px;
+    }
 </style>
