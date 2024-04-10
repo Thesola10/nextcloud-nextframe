@@ -14,11 +14,11 @@ class Version000001Date20240410124100 extends SimpleMigrationStep {
         $schema = $schemaClosure();
 
         if ($schema->hasTable('nextframe_clients')) {
-            $schema->dropTable('nextframe_clients'));
+            $schema->dropTable('nextframe_clients');
         }
 
-        if ($schema->hasTable('nextframe_ancestor_uris')) {
-            $schema->dropTable('nextframe_ancestor_uris'));
+        if ($schema->hasTable('nextframe_ancestors')) {
+            $schema->dropTable('nextframe_ancestors');
         }
 
         if (!$schema->hasTable('nextframe_clients')) {
@@ -32,10 +32,6 @@ class Version000001Date20240410124100 extends SimpleMigrationStep {
                 'notnull' => true,
                 'length' => 64,
             ]);
-            $table->addColumn('ancestor_uri', 'string', [
-                'notnull' => true,
-                'length' => 2000,
-            ]);
             $table->addColumn('client_id', 'string', [
                 'notnull' => true,
                 'length' => 64,
@@ -44,8 +40,8 @@ class Version000001Date20240410124100 extends SimpleMigrationStep {
             $table->addUniqueIndex(['client_id'], 'nextframe_client_id_idx');
         }
 
-        if (!$schema->hasTable('nextframe_ancestor_uris')) {
-            $table = $schema->createTable('nextframe_ancestor_uris');
+        if (!$schema->hasTable('nextframe_ancestors')) {
+            $table = $schema->createTable('nextframe_ancestors');
             $table->addColumn('id', 'integer', [
                 'autoincrement' => true,
                 'notnull' => true,
@@ -59,7 +55,8 @@ class Version000001Date20240410124100 extends SimpleMigrationStep {
                 'length' => 2000,
             ]);
             $table->setPrimaryKey(['id']);
-            $table->addIndex(['client_id'], 'nextframe_ancestor_client_id_idx');
+            $table->addIndex(['client_id'], 'nextframe_ancestor_client_idx');
         }
+        return $schema;
     }
 }

@@ -8,7 +8,7 @@ use OCP\AppFramework\Db\QBMapper;
 
 class AncestorUriMapper extends QBMapper {
     public function __construct(IDBConnection $db) {
-        parent::__construct($db, 'nextframe_ancestor_uris');
+        parent::__construct($db, 'nextframe_ancestors');
     }
 
     public function find(int $id) {

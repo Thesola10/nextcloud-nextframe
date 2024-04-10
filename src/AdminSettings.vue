@@ -81,16 +81,56 @@ export default {
     },
 	methods: {
         deleteAncestorUri(id) {
-
+            axios.delete(generateUrl('apps/nextframe/clients/ancestor/{id}', { id }))
+                .then(response => {
+                    this.clients.splice(0, this.clients.length)
+                    for (let i = 0; i < response.data.length; i++) {
+                        this.clients.push(response.data[i])
+                    }
+                    this.version += 1
+                }).catch(reason => {
+                    this.error = true
+                    this.errorMsg = reason
+                })
         },
         addAncestorUri(id, uri) {
+            this.error = false
 
+            axios.post(generateUrl('apps/nextframe/clients/{id}/ancestor'),
+                        { id, ancestorUri: uri })
+                .then(response => {
+                    this.clients.splice(0, this.clients.length)
+                    for (let i = 0; i < response.data.length; i++) {
+                        this.clients.push(response.data[i])
+                    }
+                    this.version += 1
+                }).catch(reason => {
+                    this.error = true
+                    this.errorMsg = reason
+                })
         },
         deleteClient(id) {
-
+            axios.delete(generateUrl('apps/nextframe/clients/{id}', { id }))
+                .then(response => {
+                    this.clients = this.clients.filter(client => client.id !== id)
+                })
         },
         addClient() {
+            this.newClient.error = false
 
+            axios.post(generateUrl('apps/nextframe/clients'),
+                        { name: this.newClient.name
+                        , ancestorUri: this.newClient.ancestorUri
+                        })
+                .then(response => {
+                    this.clients.push(response.data)
+
+                    this.newClient.name = ''
+                    this.newClient.ancestorUri = ''
+                }).catch(reason => {
+                    this.newClient.error = true
+                    this.newClient.errorMsg = reason.response.data.message
+                })
         }
 	},
 }

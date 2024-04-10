@@ -15,8 +15,29 @@ declare(strict_types=1);
 return [
 	'resources' => [
 	],
-	'routes' => [
-        ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-        ['name' => 'PublicDisplay#get', 'url' => '/disp/{token}', 'verb' => 'GET']
-	]
+    'routes' => [
+        # Demo (only logged in, no embedding)
+        [ 'name' => 'page#index'
+        , 'url'  => '/'
+        , 'verb' => 'GET'],
+        # Actual embed page
+        [ 'name' => 'PublicDisplay#get'
+        , 'url'  => '/disp/{token}'
+        , 'verb' => 'GET'],
+
+        # Settings endpoints
+        [ 'name' => 'Settings#addClient'
+        , 'url'  => '/clients'
+        , 'verb' => 'POST'],
+        [ 'name' => 'Settings#deleteClient'
+        , 'url'  => '/clients/{id}'
+        , 'verb' => 'DELETE'],
+
+        [ 'name' => 'Settings#addAncestorUri'
+        , 'url'  => '/clients/{id}/ancestor'
+        , 'verb' => 'POST'],
+        [ 'name' => 'Settings#deleteAncestorUri'
+        , 'url'  => '/clients/ancestor/{id}'
+        , 'verb' => 'DELETE']
+    ]
 ];

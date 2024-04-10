@@ -8,6 +8,7 @@ use OCA\NextFrame\Db\ClientMapper;
 use OCA\NextFrame\Db\AncestorUri;
 use OCA\NextFrame\Db\AncestorUriMapper;
 
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Http\Template\PublicTemplateResponse;
 use OCP\AppFramework\Controller;
@@ -41,7 +42,7 @@ class PublicDisplayController extends PublicShareController {
         try {
             $this->clientMapper->findByToken($this->getToken());
             return true;
-        } catch (Exception $e) {
+        } catch (DoesNotExistException $e) {
             return false;
         }
     }
@@ -59,8 +60,6 @@ class PublicDisplayController extends PublicShareController {
         // If this fails, isValidToken() wrongly let us through.
         $client = $this->clientMapper->findByToken($this->getToken());
         $uris = $this->ancestorMapper->findByClient($client->getId());
-
-        $csp->addAllowedFrameAncestorDomain($client->getAncestorUri());
 
         foreach ($uris as $uri) {
             $csp->addAllowedFrameAncestorDomain($uri->getAncestorUri());

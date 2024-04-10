@@ -12,12 +12,11 @@ use OCP\AppFramework\Db\Entity;
  * @method void setAncestorUri(string $ancestorUri)
  */
 class AncestorUri extends Entity {
-    public int $id;
-    protected string $clientId;
-    protected string $ancestorUri;
+    public $id;
+    protected int $clientId = -1;
+    protected string $ancestorUri = '';
 
     public function __construct() {
-        $this->addType('id', 'int');
         $this->addType('client_id', 'int');
         $this->addType('ancestor_uri', 'string');
     }

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace OCA\NextFrame\Settings;
 
 use OCA\NextFrame\AppInfo\Application;
+use OCA\NextFrame\Db\ClientMapper;
+use OCA\NextFrame\Db\AncestorUriMapper;
+
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Settings\ISettings;
 use OCP\IConfig;
@@ -16,12 +19,18 @@ class Admin implements ISettings {
 
     private IConfig $config;
     private IInitialStateService $initialStateService;
+    private ClientMapper $clientMapper;
+    private AncestorUriMapper $ancestorMapper;
 
     public function __construct(IInitialStateService $initialStateService,
-                                IConfig $config)
+                                IConfig $config,
+                                ClientMapper $clientMapper,
+                                AncestorUriMapper $ancestorMapper)
     {
         $this->config = $config;
         $this->initialStateService = $initialStateService;
+        $this->clientMapper = $clientMapper;
+        $this->ancestorMapper = $ancestorMapper;
     }
 
     public function getSection(): string
@@ -37,18 +46,41 @@ class Admin implements ISettings {
 
     public function getForm(): TemplateResponse
     {
-        $clients = [
-            'demo' => [
-                'name' => "Demo",
-                'ancestorUri' => [ 
-                    0 =>
-                    [ 'id' => 0,
-                      'ancestor_uri' => 'http://127.0.0.1:8081'
-                    ]
-                ]
-            ],
-        ];
-        $this->initialStateService->provideInitialState('nextframe', 'clients', $clients);
+        #$result = [
+        #    'demo' => [
+        #        'name' => "Demo",
+        #        'ancestorUri' => [
+        #            0 =>
+        #            [ 'id' => 0,
+        #              'ancestor_uri' => 'http://127.0.0.1:8081'
+        #            ]
+        #        ]
+        #    ],
+        #];
+
+        $clients = $this->clientMapper->getClients();
+        $result = [];
+
+        foreach ($clients as $client) {
+            $ancestorUris = $this->ancestorMapper->findByClient($client->getId());
+            $resultAncestors = [];
+
+            foreach($ancestorUris as $uri) {
+                $resultAncestors[] = [
+                    'id' => $uri->getId(),
+                    'client_id' => $uri->getClientId(),
+                    'ancestor_uri' => $uri->getAncestorUri(),
+                ];
+            }
+            $result[] = [
+                'id' => $client->getId(),
+                'name' => $client->getName(),
+                'ancestorUri' => $resultAncestors,
+                'clientId' => $client->getClientId(),
+            ];
+        }
+
+        $this->initialStateService->provideInitialState('nextframe', 'clients', $result);
         Util::addScript(Application::APP_ID, 'nextframe-main');
         return new TemplateResponse(Application::APP_ID, 'settings');
     }

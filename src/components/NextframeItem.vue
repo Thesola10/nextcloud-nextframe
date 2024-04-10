@@ -10,10 +10,10 @@
                     <td>{{ t('nextframe', 'Allowed ancestors') }}</td>
                     <td>
                         <table>
-                            <tr v-for="ancestor in ancestorUri" :key="ancestorUri.id">
+                            <tr v-for="ancestor in ancestorUri" :key="ancestor.id">
                                 <td>{{ ancestor.ancestor_uri }}</td>
                                 <td class="action-column">
-                                    <span><a class="icon-delete has-tooltip" :title="t('nextframe', 'Delete')" @click="$emit('deleteancestor', ancestorUri.id)"/></span>
+                                    <span><a class="icon-delete has-tooltip" :title="t('nextframe', 'Delete')" @click="$emit('deleteancestor', ancestor.id)"/></span>
                                 </td>
                             </tr>
                         </table>
@@ -52,7 +52,7 @@ export default {
         return {
             id: this.client.id,
             name: this.client.name,
-            ancestorUris: this.client.ancestorUris,
+            ancestorUris: this.client.ancestorUri,
             addAncestorUri: '',
         }
     },
