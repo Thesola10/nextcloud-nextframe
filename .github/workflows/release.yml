@@ -12,6 +12,8 @@ jobs:
   nextcloud-build:
     name: Generate release assets
     runs-on: ubuntu-latest
+    permissions: write-all
+    environment: release
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
