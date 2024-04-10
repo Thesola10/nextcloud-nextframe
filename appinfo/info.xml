@@ -8,8 +8,12 @@
     <id>nextframe</id>
     <name>NextFrame</name>
     <summary>Embeddable Nextcloud topbar to bring your services together!</summary>
-    <description><![CDATA[This app creates a simple endpoint with the common HTML components to any Nextcloud view, with a public and logged in variant.
-This is intended to improve the &quot;togetherness&quot; of non-Nextcloud services with Nextcloud/OIDC login capabilities.]]></description>
+    <description lang="en"><![CDATA[
+This app creates a simple translucent page with the common HTML components to any Nextcloud view, with a public and logged in variant.
+This is meant to improve the &quot;togetherness&quot; of non-Nextcloud services.]]></description>
+    <description lang="fr"><![CDATA[
+Cette application crée une page transparente avec tous les composants graphiques communs à l'interface Nextcloud, avec une variante publique.
+Cela permet d'améliorer l'unité esthétique de services hors Nextcloud.]]></description>
     <version>0.0.1</version>
     <licence>agpl</licence>
     <author mail="me@thesola.io" homepage="https://thesola.io">Karim Vergnes</author>

@@ -60,7 +60,7 @@ import { showError, showSuccess } from '@nextcloud/dialogs'
 import axios from '@nextcloud/axios'
 import NextframeItem from './components/NextframeItem.vue'
 import { translate as t } from '@nextcloud/l10n'
-import VueMarkdown from '@adapttive/vue-markdown'
+import VueMarkdown from 'vue-markdown'
 
 export default {
     name: 'AdminSettings',

@@ -6,14 +6,10 @@ declare(strict_types=1);
 <style>
     :root, html, body {
         background: none !important;
-        pointer-events: none !important;
     }
 
-    header, #side-menu {
-        pointer-events: all;
-    }
-
-    #content, #unified-search, footer, .header-appname {
+    #unified-search, footer, .header-appname {
         display: none !important;
     }
 </style>
+<base target="_parent">

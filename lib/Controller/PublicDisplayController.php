@@ -76,6 +76,8 @@ class PublicDisplayController extends PublicShareController {
 
         $resp->setContentSecurityPolicy($csp);
 
+        Util::addScript(Application::APP_ID, "nextframe-iframe-resizer");
+
         return $resp;
     }
 
