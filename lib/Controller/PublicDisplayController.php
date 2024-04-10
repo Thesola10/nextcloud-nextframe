@@ -55,7 +55,6 @@ class PublicDisplayController extends PublicShareController {
      */
     public function get() {
         $csp = new ContentSecurityPolicy();
-        $csp->addAllowedFrameAncestorDomain("https://ceou.thesola.io");
 
         // If this fails, isValidToken() wrongly let us through.
         $client = $this->clientMapper->findByToken($this->getToken());

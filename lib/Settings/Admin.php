@@ -46,18 +46,6 @@ class Admin implements ISettings {
 
     public function getForm(): TemplateResponse
     {
-        #$result = [
-        #    'demo' => [
-        #        'name' => "Demo",
-        #        'ancestorUri' => [
-        #            0 =>
-        #            [ 'id' => 0,
-        #              'ancestor_uri' => 'http://127.0.0.1:8081'
-        #            ]
-        #        ]
-        #    ],
-        #];
-
         $clients = $this->clientMapper->getClients();
         $result = [];
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 // SPDX-License-Identifier: AGPL-3.0-or-later
 ?>
 <style>
-    html, body {
+    :root, html, body {
         background: none !important;
         pointer-events: none !important;
     }
 
-    header {
+    header, #side-menu {
         pointer-events: all;
     }
 

@@ -57,7 +57,7 @@ import NextframeItem from './components/NextframeItem.vue'
 
 export default {
 	name: 'AdminSettings',
-	computed: {
+	components: {
         NextframeItem
 	},
     props: {
