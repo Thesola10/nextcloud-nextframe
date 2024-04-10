@@ -25,7 +25,7 @@
                             <input v-model="addAncestorUri"
                                 type="url"
                                 name="ancestorUri"
-                                :placeholder="t('nextframe', 'Allowed Ancestor URI')">
+                                placeholder="https://example...">
                             <input type="submit" class="button" :value="t('nextframe', 'Add')">
                         </form>
                     </td>
@@ -43,6 +43,9 @@
 </template>
 
 <script>
+
+import { translate as t } from '@nextcloud/l10n'
+
 export default {
     name: 'NextframeItem',
     components: {},
@@ -63,6 +66,7 @@ export default {
     },
     computed: {},
     methods: {
+        t,
         addAncestor() {
             this.$emit('addancestor', this.id, this.addAncestorUri)
             this.addAncestorUri = ''

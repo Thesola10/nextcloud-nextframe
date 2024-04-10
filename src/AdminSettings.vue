@@ -6,7 +6,12 @@
     <div id="nextframe" class="section">
         <h2>{{ t('nextframe', 'Nextframe embedding clients') }}</h2>
         <p class="settings-hint">
-        {{ t('nextframe', 'Nextframe allows external sites to embed the {instanceName} top bar.') }}
+        {{ t('nextframe', 'Nextframe allows external sites to embed the {instanceName} top bar.', { instanceName: OC.theme.name }) }}
+        </p>
+        <p class="settings-hint">
+        <vue-markdown>
+{{ t('nextframe', 'Add an HTML `object` tag to your website pointing to the following address:') }} `{{ OC.getProtocol() }}://{{ OC.getHost() }}/{{ OC.getRootPath() }}apps/nextframe/disp/(token)`
+        </vue-markdown>
         </p>
         <span v-if="error" class="msg error">{{errorMsg}}</span>
         <table v-if="clients.length > 0" class="grid">
@@ -54,11 +59,14 @@ import { generateUrl } from '@nextcloud/router'
 import { showError, showSuccess } from '@nextcloud/dialogs'
 import axios from '@nextcloud/axios'
 import NextframeItem from './components/NextframeItem.vue'
+import { translate as t } from '@nextcloud/l10n'
+import VueMarkdown from '@adapttive/vue-markdown'
 
 export default {
     name: 'AdminSettings',
     components: {
-        NextframeItem
+        NextframeItem,
+        VueMarkdown
     },
     props: {
         clients: {
@@ -80,6 +88,7 @@ export default {
         }
     },
     methods: {
+        t,
         deleteAncestorUri(id) {
             axios.delete(generateUrl('apps/nextframe/clients/ancestor/{id}', { id }))
                 .then(response => {

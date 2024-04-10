@@ -21,7 +21,7 @@ const View = Vue.extend(AdminSettings);
 const nextframe = new View({
     propsData: {
         clients
-    }
+    },
 })
 
 nextframe.$mount('#nextframe')
