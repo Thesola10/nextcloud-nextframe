@@ -22,4 +22,7 @@ This is intended to improve the &quot;togetherness&quot; of non-Nextcloud servic
     </dependencies>
     <navigations>
     </navigations>
+    <settings>
+        <admin>OCA\NextFrame\Settings\Admin</admin>
+    </settings>
 </info>

@@ -22,7 +22,6 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function index(): TemplateResponse {
-		Util::addScript(Application::APP_ID, 'nextframe-main');
 
 		return new TemplateResponse(Application::APP_ID, 'main');
 	}

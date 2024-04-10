@@ -3,6 +3,10 @@
 namespace OCA\NextFrame\Controller;
 
 use OCA\NextFrame\AppInfo\Application;
+use OCA\NextFrame\Db\Client;
+use OCA\NextFrame\Db\ClientMapper;
+use OCA\NextFrame\Db\AncestorUri;
+use OCA\NextFrame\Db\AncestorUriMapper;
 
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Http\Template\PublicTemplateResponse;
@@ -16,34 +20,54 @@ use OCP\AppFramework\PublicShareController;
 
 class PublicDisplayController extends PublicShareController {
     private $userSession;
+    private $clientMapper;
+    private $ancestorMapper;
 
-    public function __construct(IRequest $request, IUserSession $userSession, ISession $session) {
+    public function __construct(IRequest $request,
+                                IUserSession $userSession,
+                                ISession $session,
+                                ClientMapper $clientMapper,
+                                AncestorUriMapper $ancestorMapper) {
         parent::__construct(Application::APP_ID, $request, $session);
         $this->userSession = $userSession;
+        $this->clientMapper = $clientMapper;
+        $this->ancestorMapper = $ancestorMapper;
     }
 
     /**
      * Check that we are using a valid view token
      */
     public function isValidToken(): bool {
-        return $this->getToken() === 'test';
+        try {
+            $this->clientMapper->findByToken($this->getToken());
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /**
-     * uh, get the view I guess
+     * Display the frame view with populated CSP headers for the token
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     * @PublicPage
      */
-    #[NoAdminRequired]
-    #[NoCSRFRequired]
-    #[PublicPage]
     public function get() {
-        Util::addScript(Application::APP_ID, 'nextframe-main');
-
         $csp = new ContentSecurityPolicy();
         $csp->addAllowedFrameAncestorDomain("https://ceou.thesola.io");
-        //TODO: pull AllowedFrameAncestor from config
+
+        // If this fails, isValidToken() wrongly let us through.
+        $client = $this->clientMapper->findByToken($this->getToken());
+        $uris = $this->ancestorMapper->findByClient($client->getId());
+
+        $csp->addAllowedFrameAncestorDomain($client->getAncestorUri());
+
+        foreach ($uris as $uri) {
+            $csp->addAllowedFrameAncestorDomain($uri->getAncestorUri());
+        }
 
         if ($this->userSession->getUser() === null) {
-            $resp = new PublicTemplateResponse(Application::APP_ID, 'public');
+            $resp = new PublicTemplateResponse(Application::APP_ID, 'main');
             $resp->setHeaderTitle("");
         } else {
             $resp = new TemplateResponse(Application::APP_ID, 'main');

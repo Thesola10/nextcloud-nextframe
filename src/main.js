@@ -6,14 +6,22 @@
 import { generateFilePath } from '@nextcloud/router'
 
 import Vue from 'vue'
-import App from './App'
+import AdminSettings from './AdminSettings'
+import { loadState } from '@nextcloud/initial-state'
+
+Vue.prototype.t = t
+Vue.prototype.OC = OC
 
 // eslint-disable-next-line
 __webpack_public_path__ = generateFilePath(appName, '', 'js/')
 
-Vue.mixin({ methods: { t, n } })
+const clients = loadState('nextframe', 'clients')
 
-export default new Vue({
-	el: '#content',
-	render: h => h(App),
+const View = Vue.extend(AdminSettings);
+const nextframe = new View({
+    propsData: {
+        clients
+    }
 })
+
+nextframe.$mount('#nextframe')
