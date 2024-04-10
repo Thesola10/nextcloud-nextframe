@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+name: app-release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  nextcloud-build:
+    name: Generate release assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Read package.json node and npm engines version
+        uses: skjnldsv/read-package-engines-version-actions@v1.2
+        id: versions
+        with:
+          fallbackNode: '^16'
+          fallbackNpm: '^7'
+      - name: Set up php 8.0
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          tools: composer
+          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite
+          coverage: none
+      - name: Set up node ${{ steps.versions.outputs.nodeVersion }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodeVersion }}
+      - name: Set up npm ${{ steps.versions.outputs.npmVersion }}
+        run: npm i -g npm@"${{ steps.versions.outputs.npmVersion }}"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build release package
+        run: make appstore
+      - name: Upload as asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/artifacts/nextcloud-nextframe.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
