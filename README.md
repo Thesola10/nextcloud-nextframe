@@ -3,55 +3,28 @@ SPDX-FileCopyrightText: Karim Vergnes <me@thesola.io>
 SPDX-License-Identifier: CC0-1.0
 -->
 
-# Next Frame
-Place this app in **nextcloud/apps/**
+# NextFrame
 
-## Building the app
+> “External Sites' evil twin” -- me, probably
 
-The app can be built by using the provided Makefile by running:
+NextFrame is a simple app based around the idea that actually, the Nextcloud topbar _is_ pretty cool after all.
 
-    make
+When installed, this app will create a new settings entry under `/settings/admin/additional` where you can generate a new "view token", which will be bound to a specific list of ancestors authorized by CSP.
 
-This requires the following things to be present:
-* make
-* which
-* tar: for building the archive
-* curl: used if phpunit and composer are not installed to fetch them from the web
-* npm: for building and testing everything JS, only required if a package.json is placed inside the **js/** folder
+You can then embed the Nextcloud top bar onto another website, preferably on the same domain to guarantee shared login cookies.
 
-The make command will install or update Composer dependencies if a composer.json is present and also **npm run build** if a package.json is present in the **js/** folder. The npm **build** script should use local paths for build systems and package managers, so people that simply want to build the app won't need to install npm libraries globally, e.g.:
+Here's an example of a recommended `iframe` tag making full use of Nextframe's features (requires [`iframeResizer.min.js`](https://raw.githubusercontent.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.min.js)):
 
-**package.json**:
-```json
-"scripts": {
-    "test": "node node_modules/gulp-cli/bin/gulp.js karma",
-    "prebuild": "npm install && node_modules/bower/bin/bower install && node_modules/bower/bin/bower update",
-    "build": "node node_modules/gulp-cli/bin/gulp.js"
-}
+```html
+<script src="/path/to/iframeResizer.min.js"></script>
+
+<iframe src="https://nextcloud/apps/nextframe/disp/TOKEN" id="nextframe" style="position: absolute; border: none; width: 100%; height: 60px; overflow: hidden;" scrolling="no"></iframe>
+
+<script>iFrameResize({autoSize: false}, "#nextframe")</script>
 ```
 
+## Features
 
-## Publish to App Store
+Nextframe is explicitly compatible with [iFrame Resizer](davidjbradshaw.github.io/iframe-resizer/) and [Custom Menu](https://apps.nextcloud.com/apps/side_menu).
 
-First get an account for the [App Store](http://apps.nextcloud.com/) then run:
-
-    make && make appstore
-
-The archive is located in build/artifacts/appstore and can then be uploaded to the App Store.
-
-## Running tests
-You can use the provided Makefile to run all tests by using:
-
-    make test
-
-This will run the PHP unit and integration tests and if a package.json is present in the **js/** folder will execute **npm run test**
-
-Of course you can also install [PHPUnit](http://phpunit.de/getting-started.html) and use the configurations directly:
-
-    phpunit -c phpunit.xml
-
-or:
-
-    phpunit -c phpunit.integration.xml
-
-for integration tests
+When a popover or Custom Menu is opened and iFrame Resizer is loaded, the `iframe` will grow to the size of the browser's viewport, allowing the entire UI to show properly. It shrinks back to its original height when the popover is closed.
