@@ -8,8 +8,12 @@ declare(strict_types=1);
         background: none !important;
     }
 
-    #unified-search, footer, .header-appname {
+    #unified-search, footer {
         display: none !important;
+    }
+
+    .header-appname {
+        font-size: 0;
     }
 </style>
 <base target="_parent">
