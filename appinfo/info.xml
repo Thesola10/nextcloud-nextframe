@@ -24,8 +24,6 @@ Cela permet d'améliorer l'unité esthétique de services hors Nextcloud.]]></de
     <dependencies>
         <nextcloud min-version="27" max-version="28"/>
     </dependencies>
-    <navigations>
-    </navigations>
     <settings>
         <admin>OCA\NextFrame\Settings\Admin</admin>
     </settings>
