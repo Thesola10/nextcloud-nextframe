@@ -25,6 +25,6 @@ Here's an example of a recommended `iframe` tag making full use of Nextframe's f
 
 ## Features
 
-Nextframe is explicitly compatible with [iFrame Resizer](davidjbradshaw.github.io/iframe-resizer/) and [Custom Menu](https://apps.nextcloud.com/apps/side_menu).
+Nextframe is explicitly compatible with [iFrame Resizer](https://davidjbradshaw.github.io/iframe-resizer/) and [Custom Menu](https://apps.nextcloud.com/apps/side_menu).
 
 When a popover or Custom Menu is opened and iFrame Resizer is loaded, the `iframe` will grow to the size of the browser's viewport, allowing the entire UI to show properly. It shrinks back to its original height when the popover is closed.
