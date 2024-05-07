@@ -36,6 +36,12 @@ window.addEventListener("load", (ev) => {
                 console.log("Registering %o for size change", el);
                 popupsObserver.observe(el);
             })
+    // Case for Nextcloud >=28
+    document.getElementsByClassName("header-menu")
+            .forEach(el => {
+                console.log("Registering %o for size change", el);
+                popupsObserver.observe(el);
+            })
 
     // Bonus! Support for Custom Menu
     let sidemenu = document.getElementById("side-menu")
