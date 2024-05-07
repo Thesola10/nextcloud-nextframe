@@ -14,7 +14,7 @@ This is meant to improve the &quot;togetherness&quot; of non-Nextcloud services.
     <description lang="fr"><![CDATA[
 Cette application crée une page transparente avec tous les composants graphiques communs à l'interface Nextcloud, avec une variante publique.
 Cela permet d'améliorer l'unité esthétique de services hors Nextcloud.]]></description>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <licence>agpl</licence>
     <author mail="me@thesola.io" homepage="https://thesola.io">Karim Vergnes</author>
     <namespace>NextFrame</namespace>

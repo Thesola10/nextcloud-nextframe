@@ -31,24 +31,30 @@ const popupsObserver = new IntersectionObserver(
     })
 
 window.addEventListener("load", (ev) => {
-    document.getElementsByClassName("header-menu__wrapper")
-            .forEach(el => {
-                console.log("Registering %o for size change", el);
-                popupsObserver.observe(el);
-            })
+    try {
+      document.getElementsByClassName("header-menu__wrapper")
+              .forEach(el => {
+                  console.log("Registering %o for size change", el);
+                  popupsObserver.observe(el);
+              })
+    } catch {}
     // Case for Nextcloud >=28
-    document.getElementsByClassName("header-menu")
-            .forEach(el => {
-                console.log("Registering %o for size change", el);
-                popupsObserver.observe(el);
-            })
+    try {
+      document.getElementsByClassName("header-menu")
+              .forEach(el => {
+                  console.log("Registering %o for size change", el);
+                  popupsObserver.observe(el);
+              })
+    } catch {}
 
     // Bonus! Support for Custom Menu
-    let sidemenu = document.getElementById("side-menu")
-    if (sidemenu !== null) {
-        console.log("Found Custom Menu!")
-        popupsObserver.observe(sidemenu)
-    }
+    try {
+      let sidemenu = document.getElementById("side-menu")
+      if (sidemenu !== null) {
+          console.log("Found Custom Menu!")
+          popupsObserver.observe(sidemenu)
+      }
+    } catch {}
 })
 
 if (!('parentIFrame' in window)) {
