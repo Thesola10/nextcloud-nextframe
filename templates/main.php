@@ -8,7 +8,7 @@ declare(strict_types=1);
         background: none !important;
     }
 
-    #unified-search, footer {
+    #unified-search, #unified-search__button, footer {
         display: none !important;
     }
 

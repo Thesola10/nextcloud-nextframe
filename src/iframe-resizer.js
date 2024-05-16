@@ -19,28 +19,12 @@ function shrinkFrame() {
     window.parentIFrame.size(80);
 }
 
-const popupsObserver = new IntersectionObserver(
-    (entries, observer) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                growFrame();
-            } else {
-                shrinkFrame();
-            }
-        })
-    })
-
-window.addEventListener("load", (ev) => {
+/*
+ * Hooks HTML elements to popup observer
+ */
+function hookObserver() {
     try {
       document.getElementsByClassName("header-menu__wrapper")
-              .forEach(el => {
-                  console.log("Registering %o for size change", el);
-                  popupsObserver.observe(el);
-              })
-    } catch {}
-    // Case for Nextcloud >=28
-    try {
-      document.getElementsByClassName("header-menu")
               .forEach(el => {
                   console.log("Registering %o for size change", el);
                   popupsObserver.observe(el);
@@ -55,7 +39,27 @@ window.addEventListener("load", (ev) => {
           popupsObserver.observe(sidemenu)
       }
     } catch {}
+}
+
+const popupsObserver = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                growFrame();
+            } else {
+                shrinkFrame();
+            }
+        })
+    })
+
+window.addEventListener("load", () => {
+    hookObserver();
+    // Unfortunately I couldn't find a way to wait for everything to render,
+    // so just try again later
+    setTimeout(hookObserver, 6000);
 })
+
+
 
 if (!('parentIFrame' in window)) {
     let style = "font-size: 1.5em;"
