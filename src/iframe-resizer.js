@@ -24,11 +24,12 @@ function shrinkFrame() {
  */
 function hookObserver() {
     try {
-      document.getElementsByClassName("header-menu__wrapper")
-              .forEach(el => {
-                  console.log("Registering %o for size change", el);
-                  popupsObserver.observe(el);
-              })
+      const els = document.getElementsByClassName("header-menu__wrapper");
+      for (var i = 0; i < els.length; i++) {
+        const el = els.item(i);
+        console.log("Registering %o for size change", el);
+        popupsObserver.observe(el);
+      }
     } catch {}
 
     // Bonus! Support for Custom Menu
