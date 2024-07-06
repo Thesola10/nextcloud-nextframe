@@ -9,7 +9,7 @@ SPDX-License-Identifier: CC0-1.0
 
 NextFrame is a simple app based around the idea that actually, the Nextcloud topbar _is_ pretty cool after all.
 
-When installed, this app will create a new settings entry under `/settings/admin/additional` where you can generate a new "view token", which will be bound to a specific list of ancestors authorized by CSP. You should also configure reverse proxy, for nginx instructions see the [Configuring nginx](./README.md#Configuring-nginx) section below.
+When installed, this app will create a new settings entry under `/settings/admin/additional` where you can generate a new "view token", which will be bound to a specific list of ancestors authorized by CSP. You may also need to configure your reverse proxy, for `nginx` instructions, see the [Configuring nginx](./README.md#Configuring-nginx) section below.
 
 You can then embed the Nextcloud top bar onto another website, preferably on the same domain to guarantee shared login cookies.
 
