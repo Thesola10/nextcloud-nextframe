@@ -22,7 +22,7 @@ Cela permet d'améliorer l'unité esthétique de services hors Nextcloud.]]></de
     <category>tools</category>
     <bugs>https://github.com/thesola10/nextcloud-nextframe/issues</bugs>
     <dependencies>
-        <nextcloud min-version="27" max-version="29"/>
+        <nextcloud min-version="27" max-version="30"/>
     </dependencies>
     <settings>
         <admin>OCA\NextFrame\Settings\Admin</admin>
